@@ -22,7 +22,7 @@ class _HeaderState extends State<Header> with TickerProviderStateMixin {
       curve: Curves.easeInOut,
     );
 
-    _controller.animateTo(0.5);
+    _controller.animateTo(1.0);
   }
 
   @override
@@ -57,8 +57,31 @@ class _Column extends StatelessWidget {
             "Discover. Learn. Elevate.",
             style: TextStyle(fontSize: 24.0, color: Colors.white),
           ),
-          // text
+          SizedBox(height: 36.0),
+          _Button(),
         ],
+      ),
+    );
+  }
+}
+
+class _Button extends StatefulWidget {
+  @override
+  __ButtonState createState() => __ButtonState();
+}
+
+class __ButtonState extends State<_Button> {
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 32.0),
+      onPressed: () => print('start exploring'),
+      child: Text(
+        "START EXPLORING",
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(99.9),
       ),
     );
   }
