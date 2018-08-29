@@ -10,6 +10,7 @@ class Bookshelf extends StatefulWidget {
 class _BookshelfState extends State<Bookshelf> with TickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _animation;
+  PageController _pageController;
 
   @override
   void initState() {
@@ -24,6 +25,10 @@ class _BookshelfState extends State<Bookshelf> with TickerProviderStateMixin {
     _animation = CurvedAnimation(
       parent: _controller,
       curve: Curves.easeIn,
+    );
+
+    _pageController = PageController(
+      viewportFraction: 0.9,
     );
   }
 
@@ -41,7 +46,7 @@ class _BookshelfState extends State<Bookshelf> with TickerProviderStateMixin {
       child: SizeTransition(
         sizeFactor: _animation,
         axis: Axis.horizontal,
-        axisAlignment: -1.0,
+        axisAlignment: -0.9,
         child: Container(
           alignment: Alignment.bottomCenter,
           child: Container(
@@ -52,6 +57,7 @@ class _BookshelfState extends State<Bookshelf> with TickerProviderStateMixin {
               initialData: <Book>[],
               builder: (context, AsyncSnapshot<List<Book>> snapshot) =>
                   PageView(
+                    controller: _pageController,
                     children: snapshot.data
                         .map((book) => MyBook(book: book))
                         .toList(),
@@ -71,7 +77,7 @@ class MyBook extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(24.0),
+      margin: EdgeInsets.symmetric(vertical: 24.0, horizontal: 12.0),
       decoration: BoxDecoration(
         color: Colors.grey[100],
         borderRadius: BorderRadius.circular(12.0),
