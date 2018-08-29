@@ -9,11 +9,15 @@ class _HeaderState extends State<Header> with TickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _animation;
 
+  bool onboarding = true;
+
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: Duration(milliseconds: 160),
+      duration: Duration(milliseconds: 300),
+      lowerBound: 0.5,
+      upperBound: 1.0,
       vsync: this,
     );
 
@@ -21,15 +25,42 @@ class _HeaderState extends State<Header> with TickerProviderStateMixin {
       parent: _controller,
       curve: Curves.easeInOut,
     );
+  }
 
-    _controller.animateTo(1.0);
+  _handlePressed() {
+    setState(() => onboarding = !onboarding);
   }
 
   @override
   Widget build(BuildContext context) {
+    if (onboarding)
+      _controller.forward();
+    else
+      _controller.reverse();
+
     return SizeTransition(
       sizeFactor: _animation,
-      child: _Column(),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            // icon
+            Image.asset(
+              "assets/logo.png",
+              width: 90.0,
+            ),
+            SizedBox(height: 36.0),
+            Text(
+              "Discover. Learn. Elevate.",
+              style: TextStyle(fontSize: 24.0, color: Colors.white),
+            ),
+            SizedBox(height: 36.0),
+            _Button(
+              onPressed: () => _handlePressed(),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -40,42 +71,15 @@ class _HeaderState extends State<Header> with TickerProviderStateMixin {
   }
 }
 
-class _Column extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          // icon
-          Image.asset(
-            "assets/logo.png",
-            width: 90.0,
-          ),
-          SizedBox(height: 36.0),
-          Text(
-            "Discover. Learn. Elevate.",
-            style: TextStyle(fontSize: 24.0, color: Colors.white),
-          ),
-          SizedBox(height: 36.0),
-          _Button(),
-        ],
-      ),
-    );
-  }
-}
+class _Button extends StatelessWidget {
+  final VoidCallback onPressed;
+  _Button({this.onPressed});
 
-class _Button extends StatefulWidget {
-  @override
-  __ButtonState createState() => __ButtonState();
-}
-
-class __ButtonState extends State<_Button> {
   @override
   Widget build(BuildContext context) {
     return RaisedButton(
       padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 32.0),
-      onPressed: () => print('start exploring'),
+      onPressed: () => onPressed(),
       child: Text(
         "START EXPLORING",
         style: TextStyle(fontWeight: FontWeight.bold),
