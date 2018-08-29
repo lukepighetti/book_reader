@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../bloc.dart';
 
 class Header extends StatefulWidget {
   @override
@@ -8,8 +9,6 @@ class Header extends StatefulWidget {
 class _HeaderState extends State<Header> with TickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _animation;
-
-  bool onboarding = true;
 
   @override
   void initState() {
@@ -27,16 +26,14 @@ class _HeaderState extends State<Header> with TickerProviderStateMixin {
     );
   }
 
-  _handlePressed() {
-    setState(() => onboarding = !onboarding);
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (onboarding)
-      _controller.forward();
-    else
-      _controller.reverse();
+    BlocProvider.of(context).isOnboarding.listen((isOnboarding) {
+      if (isOnboarding)
+        _controller.forward();
+      else
+        _controller.reverse();
+    });
 
     return SizeTransition(
       sizeFactor: _animation,
@@ -55,9 +52,7 @@ class _HeaderState extends State<Header> with TickerProviderStateMixin {
               style: TextStyle(fontSize: 24.0, color: Colors.white),
             ),
             SizedBox(height: 36.0),
-            _Button(
-              onPressed: () => _handlePressed(),
-            ),
+            _Button(),
           ],
         ),
       ),
@@ -72,14 +67,13 @@ class _HeaderState extends State<Header> with TickerProviderStateMixin {
 }
 
 class _Button extends StatelessWidget {
-  final VoidCallback onPressed;
-  _Button({this.onPressed});
-
   @override
   Widget build(BuildContext context) {
+    final bloc = BlocProvider.of(context);
+
     return RaisedButton(
       padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 32.0),
-      onPressed: () => onPressed(),
+      onPressed: () => bloc.onboarded(false),
       child: Text(
         "START EXPLORING",
         style: TextStyle(fontWeight: FontWeight.bold),

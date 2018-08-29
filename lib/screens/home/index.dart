@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'bloc.dart';
+
 import 'widgets/background.dart';
 import 'widgets/header.dart';
 
@@ -7,7 +9,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _Body(),
+      body: BlocProvider(
+        homeBloc: HomeBloc(),
+        child: _Body(),
+      ),
     );
   }
 }
@@ -15,6 +20,9 @@ class HomePage extends StatelessWidget {
 class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final bloc = BlocProvider.of(context);
+    bloc.onboarded(true);
+
     return Stack(
       children: <Widget>[
         Background(),
