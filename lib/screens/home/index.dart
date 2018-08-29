@@ -5,6 +5,7 @@ import 'bloc.dart';
 import 'widgets/background.dart';
 import 'widgets/header.dart';
 import 'widgets/drawer.dart';
+import 'widgets/books.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -27,7 +28,7 @@ class _Body extends StatelessWidget {
         Background(),
         Header(),
         MyDrawer(),
-        // _Drawer(),
+        Books(),
         // _Pages(),
       ],
     );

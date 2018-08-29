@@ -105,8 +105,8 @@ class __ButtonState extends State<_Button> with TickerProviderStateMixin {
         _controller.forward();
     });
 
-    return SizeTransition(
-      sizeFactor: _animation,
+    return FadeTransition(
+      opacity: _animation,
       child: Center(
         child: RaisedButton(
           padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 32.0),
