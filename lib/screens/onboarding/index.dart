@@ -19,7 +19,10 @@ class _Body extends StatelessWidget {
           SizedBox(height: 10.0),
           Column(
             children: <Widget>[
-              Icon(Icons.person, size: 48.0),
+              Image.asset(
+                "assets/logo.png",
+                width: 90.0,
+              ),
               SizedBox(height: 36.0),
               Text(
                 "Discover. Learn. Elevate.",
@@ -27,7 +30,7 @@ class _Body extends StatelessWidget {
               ),
               SizedBox(height: 36.0),
               RaisedButton(
-                padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 32.0),
                 onPressed: () => print('start exploring'),
                 child: Text(
                   "START EXPLORING",
@@ -43,7 +46,7 @@ class _Body extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 24.0),
             child: Text(
               "BY LUKE PIGHETTI",
-              style: TextStyle(fontSize: 12.0, color: Colors.white),
+              style: TextStyle(fontSize: 10.0, color: Colors.white),
             ),
           ),
         ],
