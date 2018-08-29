@@ -41,6 +41,11 @@ class _BookshelfState extends State<Bookshelf> with TickerProviderStateMixin {
         _controller.reverse();
     });
 
+    _pageController.addListener(() {
+      BlocProvider.of(context).setScrollPosition(
+          _pageController.offset / _pageController.position.maxScrollExtent);
+    });
+
     return SizeTransition(
       sizeFactor: _animation,
       axis: Axis.horizontal,

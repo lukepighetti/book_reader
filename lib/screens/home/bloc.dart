@@ -6,16 +6,19 @@ import 'models.dart';
 import 'mock.dart' as Mocks;
 
 class HomeBloc {
+  /// onboarding
   final _subject = BehaviorSubject<bool>(seedValue: true);
-
   Stream<bool> get hasOnboarded => _subject.stream;
+  void onboarded(bool boolean) => _subject.add(boolean);
 
-  void onboarded(bool boolean) {
-    _subject.add(boolean);
-  }
-
+  /// books
   final _booksSubject = BehaviorSubject<List<Book>>(seedValue: Mocks.books);
   Stream<List<Book>> get books => _booksSubject.stream;
+
+  /// scroll position
+  final _scrollSubject = BehaviorSubject<double>(seedValue: 0.0);
+  Stream<double> get scrollPosition => _scrollSubject.stream;
+  void setScrollPosition(double value) => _scrollSubject.add(value);
 }
 
 class BlocProvider extends InheritedWidget {

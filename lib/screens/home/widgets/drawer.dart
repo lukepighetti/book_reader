@@ -67,7 +67,12 @@ class _Progress extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(bottom: 24.0),
       width: MediaQuery.of(context).size.width * 0.7,
-      child: LinearProgressIndicator(value: 0.2),
+      child: StreamBuilder(
+        stream: BlocProvider.of(context).scrollPosition,
+        initialData: 0.0,
+        builder: (context, AsyncSnapshot<double> snapshot) =>
+            LinearProgressIndicator(value: snapshot.data),
+      ),
     );
   }
 }
