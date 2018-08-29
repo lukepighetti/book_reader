@@ -16,7 +16,7 @@ class _MyDrawerState extends State<MyDrawer> with TickerProviderStateMixin {
     _controller = AnimationController(
       duration: Duration(milliseconds: 300),
       lowerBound: 0.0,
-      upperBound: 0.57,
+      upperBound: 0.64,
       vsync: this,
     );
 
