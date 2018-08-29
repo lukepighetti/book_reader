@@ -20,9 +20,6 @@ class HomePage extends StatelessWidget {
 class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of(context);
-    bloc.onboarded(true);
-
     return Stack(
       children: <Widget>[
         Background(),

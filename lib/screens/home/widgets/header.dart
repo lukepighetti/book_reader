@@ -28,11 +28,11 @@ class _HeaderState extends State<Header> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of(context).isOnboarding.listen((isOnboarding) {
-      if (isOnboarding)
-        _controller.forward();
-      else
+    BlocProvider.of(context).hasOnboarded.listen((hasOnboarded) {
+      if (hasOnboarded)
         _controller.reverse();
+      else
+        _controller.forward();
     });
 
     return SizeTransition(
@@ -41,10 +41,12 @@ class _HeaderState extends State<Header> with TickerProviderStateMixin {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // icon
-            Image.asset(
-              "assets/logo.png",
-              width: 90.0,
+            GestureDetector(
+              onTap: () => BlocProvider.of(context).onboarded(false),
+              child: Image.asset(
+                "assets/logo.png",
+                width: 90.0,
+              ),
             ),
             SizedBox(height: 36.0),
             Text(
@@ -66,21 +68,77 @@ class _HeaderState extends State<Header> with TickerProviderStateMixin {
   }
 }
 
-class _Button extends StatelessWidget {
+class _Button extends StatefulWidget {
+  @override
+  __ButtonState createState() => __ButtonState();
+}
+
+class __ButtonState extends State<_Button> with TickerProviderStateMixin {
+  AnimationController _controller;
+  Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: Duration(milliseconds: 300),
+      lowerBound: 0.0,
+      upperBound: 1.0,
+      vsync: this,
+    );
+
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInOut,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of(context);
 
-    return RaisedButton(
-      padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 32.0),
-      onPressed: () => bloc.onboarded(false),
-      child: Text(
-        "START EXPLORING",
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(99.9),
+    bloc.hasOnboarded.listen((hasOnboarded) {
+      print(hasOnboarded);
+      if (hasOnboarded)
+        _controller.reverse();
+      else
+        _controller.forward();
+    });
+
+    return SizeTransition(
+      sizeFactor: _animation,
+      child: Center(
+        child: RaisedButton(
+          padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 32.0),
+          onPressed: () => bloc.onboarded(true),
+          child: Text(
+            "START EXPLORING",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(99.9),
+          ),
+        ),
       ),
     );
   }
 }
+
+// class _Button extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     final bloc = BlocProvider.of(context);
+
+//     return RaisedButton(
+//       padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 32.0),
+//       onPressed: () => bloc.onboarded(false),
+//       child: Text(
+//         "START EXPLORING",
+//         style: TextStyle(fontWeight: FontWeight.bold),
+//       ),
+//       shape: RoundedRectangleBorder(
+//         borderRadius: BorderRadius.circular(99.9),
+//       ),
+//     );
+//   }
+// }

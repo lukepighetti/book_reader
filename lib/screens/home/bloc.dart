@@ -3,12 +3,11 @@ import 'package:rxdart/subjects.dart' show BehaviorSubject;
 import 'package:flutter/widgets.dart';
 
 class HomeBloc {
-  final _subject = BehaviorSubject<bool>();
+  final _subject = BehaviorSubject<bool>(seedValue: false);
 
-  Stream<bool> get isOnboarding => _subject.stream;
+  Stream<bool> get hasOnboarded => _subject.stream;
 
   void onboarded(bool boolean) {
-    print('onboarded $boolean');
     _subject.add(boolean);
   }
 }
