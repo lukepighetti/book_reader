@@ -36,9 +36,10 @@ class _HeaderState extends State<Header> with TickerProviderStateMixin {
     });
 
     return SafeArea(
-      child: SizeTransition(
-        sizeFactor: _animation,
-        child: Center(
+      child: Container(
+        alignment: Alignment.topCenter,
+        child: SizeTransition(
+          sizeFactor: _animation,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[

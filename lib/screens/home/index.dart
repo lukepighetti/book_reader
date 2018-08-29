@@ -23,7 +23,7 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      // alignment: Alignment.bottomRight,
+      alignment: Alignment.bottomCenter,
       children: <Widget>[
         Background(),
         Header(),

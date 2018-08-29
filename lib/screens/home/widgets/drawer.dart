@@ -16,13 +16,13 @@ class _MyDrawerState extends State<MyDrawer> with TickerProviderStateMixin {
     _controller = AnimationController(
       duration: Duration(milliseconds: 300),
       lowerBound: 0.0,
-      upperBound: 0.64,
+      upperBound: 1.0,
       vsync: this,
     );
 
     _animation = CurvedAnimation(
       parent: _controller,
-      curve: Curves.easeInOut,
+      curve: Curves.easeIn,
     );
   }
 
@@ -35,27 +35,39 @@ class _MyDrawerState extends State<MyDrawer> with TickerProviderStateMixin {
         _controller.reverse();
     });
 
-    return Container(
-      alignment: Alignment.bottomCenter,
-      child: SizeTransition(
-        sizeFactor: _animation,
-        axisAlignment: -1.0,
+    return SizeTransition(
+      sizeFactor: _animation,
+      axisAlignment: -1.0,
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.72,
+        margin: EdgeInsets.only(top: 12.0),
+        alignment: Alignment.topCenter,
+        decoration: BoxDecoration(
+          color: Colors.grey[100],
+          borderRadius: BorderRadius.circular(32.0),
+          boxShadow: <BoxShadow>[
+            BoxShadow(blurRadius: 12.0, spreadRadius: -4.0)
+          ],
+        ),
         child: Container(
-          margin: EdgeInsets.only(top: 12.0),
-          alignment: Alignment.topCenter,
-          decoration: BoxDecoration(
-            color: Colors.grey[100],
-            borderRadius: BorderRadius.circular(32.0),
-            boxShadow: <BoxShadow>[
-              BoxShadow(blurRadius: 12.0, spreadRadius: -4.0)
-            ],
-          ),
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 12.0),
-            child: _TabBar(),
+          padding: EdgeInsets.symmetric(horizontal: 12.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[_TabBar(), _Progress()],
           ),
         ),
       ),
+    );
+  }
+}
+
+class _Progress extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(bottom: 24.0),
+      width: MediaQuery.of(context).size.width * 0.7,
+      child: LinearProgressIndicator(value: 0.2),
     );
   }
 }
