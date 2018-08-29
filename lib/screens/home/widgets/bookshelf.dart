@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import '../bloc.dart';
 
-class Books extends StatefulWidget {
+class Bookshelf extends StatefulWidget {
   @override
-  _BooksState createState() => _BooksState();
+  _BookshelfState createState() => _BookshelfState();
 }
 
-class _BooksState extends State<Books> {
+class _BookshelfState extends State<Bookshelf> {
   @override
   Widget build(BuildContext context) {
     return Container();
