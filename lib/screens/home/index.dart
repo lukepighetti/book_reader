@@ -4,6 +4,7 @@ import 'bloc.dart';
 
 import 'widgets/background.dart';
 import 'widgets/header.dart';
+import 'widgets/drawer.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -21,9 +22,11 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      // alignment: Alignment.bottomRight,
       children: <Widget>[
         Background(),
         Header(),
+        MyDrawer(),
         // _Drawer(),
         // _Pages(),
       ],
