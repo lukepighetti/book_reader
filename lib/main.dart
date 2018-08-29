@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/onboarding/index.dart';
+import 'screens/home/index.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         canvasColor: Colors.indigo[800],
       ),
-      home: OnboardingPage(),
+      home: HomePage(),
     );
   }
 }
