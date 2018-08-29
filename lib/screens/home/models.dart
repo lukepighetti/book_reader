@@ -1,10 +1,10 @@
-import 'package:flutter/widgets.dart' show Image, Color;
+import 'package:flutter/widgets.dart' show ImageProvider, Color;
 
 class Book {
   int isbn;
   String title;
   String author;
-  Image hero;
+  ImageProvider hero;
   Color color;
   String body;
 

@@ -123,22 +123,3 @@ class __ButtonState extends State<_Button> with TickerProviderStateMixin {
     );
   }
 }
-
-// class _Button extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     final bloc = BlocProvider.of(context);
-
-//     return RaisedButton(
-//       padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 32.0),
-//       onPressed: () => bloc.onboarded(false),
-//       child: Text(
-//         "START EXPLORING",
-//         style: TextStyle(fontWeight: FontWeight.bold),
-//       ),
-//       shape: RoundedRectangleBorder(
-//         borderRadius: BorderRadius.circular(99.9),
-//       ),
-//     );
-//   }
-// }

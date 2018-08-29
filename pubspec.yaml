@@ -29,6 +29,9 @@ flutter:
   assets:
     - assets/logo.png
     - assets/overlay.png
+    - assets/DesignLeadershipCover.png
+    - assets/DesignOpsCover.png
+    - assets/DesignSystemsCover.png
   #  - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

@@ -1,11 +1,11 @@
 import 'models.dart';
-import 'package:flutter/widgets.dart' show Image, Color;
+import 'package:flutter/widgets.dart' show AssetImage, Color;
 
 final List books = <Book>[
   Book(
     title: "Introducing DesignOps",
     author: "Dave Malouf",
-    hero: Image.asset('assets/DesignOpsCover.png'),
+    hero: AssetImage('assets/DesignOpsCover.png'),
     color: Color(0xFFDA4A71),
     body:
         "I’ve always been on the fringe of people in the design community who love how design works more than they love designing. Throughout my career as a designer, I have leaned more toward process over practice, and in some circles I was made to feel like a pariah because of my fixation on semantics (resulting in my last name being affectionately turned into a verb by colleagues: “maloufing”).\n\n"
@@ -14,7 +14,7 @@ final List books = <Book>[
   Book(
     title: "Design Systems Handbook",
     author: "Marco Suarez",
-    hero: Image.asset('assets/DesignSystemsCover.png'),
+    hero: AssetImage('assets/DesignSystemsCover.png'),
     color: Color(0xFF488C59),
     body:
         "In the 1960s, computer technology began outpacing the speed of software programming. Computers became faster and cheaper, but software development remained slow, difficult to maintain, and prone to errors. This gap, and the dilemma of what to do about it, became known as the “software crisis.”\n\n"
@@ -23,7 +23,7 @@ final List books = <Book>[
   Book(
     title: "Design Leadership Handbook",
     author: "Aarron Walter",
-    hero: Image.asset('assets/DesignLeadershipCover.png'),
+    hero: AssetImage('assets/DesignLeadershipCover.png'),
     color: Color(0xFF782AA1),
     body:
         "Andy Law spotted an opportunity. As a designer at Netflix, he saw firsthand the need for someone to step up and bridge the gap between mobile design and the company’s engineering management. Things would be more efficient with some design leadership. Andy raised his hand and found himself in a new leadership position.\n\n"
