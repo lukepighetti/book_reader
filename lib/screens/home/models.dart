@@ -1,4 +1,5 @@
-import 'package:flutter/widgets.dart' show ImageProvider, Color;
+import 'package:flutter/widgets.dart'
+    show ImageProvider, Color, LinearGradient, Gradient, HSVColor;
 import 'dart:math' show max, min;
 
 class Book {
@@ -32,20 +33,24 @@ class ColorTransition {
     this.maxExtent,
   }) {
     double period = maxExtent / (colors.length - 1);
+
+    /// limit index to positive integers
     int index = max(0, (offset / period).floor());
 
     Color firstColor = colors[index];
 
+    /// this stops us from trying to blend a null secondColor
+    /// when we're at the end of the list
     if (index != colors.length - 1) {
       Color secondColor = colors[index + 1];
+
+      /// limit offset to within the bounds,
+      /// this is to help with iOS overshooting scroll bounds
       double blend = (min(max(0.0, offset), maxExtent) % period) / period;
 
-      /// alpha blend isn't going to work, we need some kind of tweening
-      this.blendedColor = Color.alphaBlend(
-        firstColor.withOpacity(1.0 - blend),
-        secondColor.withOpacity(blend),
-      );
+      this.blendedColor = Color.lerp(firstColor, secondColor, blend);
     } else {
+      /// we're at the end of the list, so there's nothing to interpolate towards
       this.blendedColor = firstColor;
     }
   }
