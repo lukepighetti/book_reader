@@ -43,7 +43,8 @@ class _BookshelfState extends State<Bookshelf> with TickerProviderStateMixin {
 
     _pageController.addListener(() {
       BlocProvider.of(context).setScrollPosition(
-          _pageController.offset / _pageController.position.maxScrollExtent);
+            _pageController.offset / _pageController.position.maxScrollExtent,
+          );
     });
 
     return Container(
@@ -60,18 +61,38 @@ class _BookshelfState extends State<Bookshelf> with TickerProviderStateMixin {
             child: StreamBuilder(
               stream: BlocProvider.of(context).books,
               initialData: <Book>[],
-              builder: (context, AsyncSnapshot<List<Book>> snapshot) =>
-                  PageView(
-                    controller: _pageController,
-                    children: snapshot.data
-                        .map((book) => MyBook(book: book))
-                        .toList(),
-                  ),
+              builder: (context, AsyncSnapshot<List<Book>> snapshot) {
+                /// setup listener for color transition
+                _pageController.addListener(() {
+                  if (snapshot.data.isNotEmpty)
+                    BlocProvider.of(context).setColor(
+                          ColorTransition(
+                            colors: snapshot.data
+                                .map((book) => book.color)
+                                .toList(),
+                            offset: _pageController.offset,
+                            maxExtent: _pageController.position.maxScrollExtent,
+                          ),
+                        );
+                });
+
+                return PageView(
+                  controller: _pageController,
+                  children:
+                      snapshot.data.map((book) => MyBook(book: book)).toList(),
+                );
+              },
             ),
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 }
 

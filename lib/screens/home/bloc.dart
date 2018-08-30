@@ -2,6 +2,8 @@ import 'dart:async' show Stream;
 import 'package:rxdart/subjects.dart' show BehaviorSubject;
 import 'package:flutter/widgets.dart';
 
+import 'package:flutter/material.dart' show Colors;
+
 import 'models.dart';
 import 'mock.dart' as Mocks;
 
@@ -19,8 +21,17 @@ class HomeBloc {
   final _scrollSubject = BehaviorSubject<double>(seedValue: 0.0);
   Stream<double> get scrollPosition => _scrollSubject.stream;
   void setScrollPosition(double value) => _scrollSubject.add(value);
+
+  /// color
+  final _colorSubject = BehaviorSubject<Color>(seedValue: Colors.indigo[800]);
+  Stream<Color> get currentColor => _colorSubject.stream;
+  void setColor(ColorTransition _transition) =>
+      _colorSubject.add(_transition.blendedColor);
 }
 
+///
+/// provider
+///
 class BlocProvider extends InheritedWidget {
   final HomeBloc homeBloc;
 
