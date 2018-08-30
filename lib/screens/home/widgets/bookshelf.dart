@@ -63,8 +63,8 @@ class _BookshelfState extends State<Bookshelf> with TickerProviderStateMixin {
               stream: BlocProvider.of(context).books,
               initialData: <Book>[],
               builder: (context, AsyncSnapshot<List<Book>> snapshot) {
-                /// helper function for setting bloc color
-                _saveColor() {
+                /// update on scroll
+                _pageController.addListener(() {
                   if (snapshot.data.isNotEmpty)
                     BlocProvider.of(context).setColor(
                           ColorTransition(
@@ -75,13 +75,7 @@ class _BookshelfState extends State<Bookshelf> with TickerProviderStateMixin {
                             maxExtent: _pageController.position.maxScrollExtent,
                           ),
                         );
-                }
-
-                /// save immediately
-                _saveColor();
-
-                /// update on scroll
-                _pageController.addListener(() => _saveColor());
+                });
 
                 return PageView(
                   controller: _pageController,

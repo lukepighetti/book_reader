@@ -77,7 +77,7 @@ class _Progress extends StatelessWidget {
             BlocProvider.of(context).scrollPosition,
             BlocProvider.of(context).currentColor,
             (double a, Color b) => DoubleColor(a, b)),
-        initialData: DoubleColor(0.0, Colors.transparent),
+        initialData: DoubleColor(0.0, Color(0xFF323CCE)),
         builder: (context, AsyncSnapshot<DoubleColor> snapshot) =>
             LinearProgressIndicator(
                 valueColor: AlwaysStoppedAnimation(snapshot.data.color),

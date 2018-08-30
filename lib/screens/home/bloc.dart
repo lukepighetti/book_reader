@@ -9,7 +9,7 @@ import 'mock.dart' as Mocks;
 
 class HomeBloc {
   /// onboarding
-  final _subject = BehaviorSubject<bool>(seedValue: true);
+  final _subject = BehaviorSubject<bool>(seedValue: false);
   Stream<bool> get hasOnboarded => _subject.stream;
   void onboarded(bool boolean) => _subject.add(boolean);
 
@@ -23,7 +23,7 @@ class HomeBloc {
   void setScrollPosition(double value) => _scrollSubject.add(value);
 
   /// color
-  final _colorSubject = BehaviorSubject<Color>(seedValue: Colors.indigo[800]);
+  final _colorSubject = BehaviorSubject<Color>(seedValue: Color(0xFF323CCE));
   Stream<Color> get currentColor => _colorSubject.stream;
   void setColor(ColorTransition _transition) =>
       _colorSubject.add(_transition.blendedColor);

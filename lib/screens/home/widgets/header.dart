@@ -104,14 +104,11 @@ class __IconState extends State<_Icon> with TickerProviderStateMixin {
     return ScaleTransition(
       alignment: Alignment.bottomCenter,
       scale: _animation,
-      child: GestureDetector(
-        onTap: () => BlocProvider.of(context).onboarded(false),
-        child: Container(
-          padding: EdgeInsets.only(bottom: 36.0),
-          child: Image.asset(
-            "assets/logo.png",
-            width: 90.0,
-          ),
+      child: Container(
+        padding: EdgeInsets.only(bottom: 36.0),
+        child: Image.asset(
+          "assets/logo.png",
+          width: 90.0,
         ),
       ),
     );
