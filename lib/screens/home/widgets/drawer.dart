@@ -46,7 +46,8 @@ class _MyDrawerState extends State<MyDrawer> with TickerProviderStateMixin {
         alignment: Alignment.topCenter,
         decoration: BoxDecoration(
           color: Colors.grey[100],
-          borderRadius: BorderRadius.circular(32.0),
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(32.0), topRight: Radius.circular(32.0)),
           boxShadow: <BoxShadow>[
             BoxShadow(blurRadius: 12.0, spreadRadius: -4.0)
           ],

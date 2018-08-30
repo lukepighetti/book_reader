@@ -10,8 +10,8 @@ import 'widgets/bookshelf.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocProvider(
+    return Material(
+      child: BlocProvider(
         homeBloc: HomeBloc(),
         child: _Body(),
       ),
