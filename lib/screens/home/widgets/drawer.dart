@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../bloc.dart';
+import 'package:rxdart/rxdart.dart' show Observable;
+import '../models.dart' show DoubleColor;
 
 class MyDrawer extends StatefulWidget {
   @override
@@ -71,10 +73,16 @@ class _Progress extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 24.0),
       width: MediaQuery.of(context).size.width * 0.7,
       child: StreamBuilder(
-        stream: BlocProvider.of(context).scrollPosition,
-        initialData: 0.0,
-        builder: (context, AsyncSnapshot<double> snapshot) =>
-            LinearProgressIndicator(value: snapshot.data),
+        stream: Observable.combineLatest2(
+            BlocProvider.of(context).scrollPosition,
+            BlocProvider.of(context).currentColor,
+            (double a, Color b) => DoubleColor(a, b)),
+        initialData: DoubleColor(0.0, Colors.transparent),
+        builder: (context, AsyncSnapshot<DoubleColor> snapshot) =>
+            LinearProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(snapshot.data.color),
+                backgroundColor: snapshot.data.color.withOpacity(0.2),
+                value: snapshot.data.number),
       ),
     );
   }
@@ -85,18 +93,23 @@ class _TabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 4,
-      child: TabBar(
-        labelStyle: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w600),
-        labelColor: Colors.black,
-        unselectedLabelColor: Colors.grey,
-        isScrollable: true,
-        indicatorWeight: 4.0,
-        indicatorPadding: EdgeInsets.all(12.0),
-        tabs: [
-          Tab(text: "BOOKS"),
-          Tab(text: "PODCAST"),
-          Tab(text: "WORKSHOPS"),
-        ],
+      child: StreamBuilder(
+        stream: BlocProvider.of(context).currentColor,
+        builder: (_, AsyncSnapshot<Color> snapshot) => TabBar(
+              labelStyle:
+                  TextStyle(fontSize: 14.0, fontWeight: FontWeight.w600),
+              labelColor: Colors.black,
+              unselectedLabelColor: Colors.grey,
+              isScrollable: true,
+              indicatorWeight: 4.0,
+              indicatorPadding: EdgeInsets.all(12.0),
+              indicatorColor: snapshot.data,
+              tabs: [
+                Tab(text: "BOOKS"),
+                Tab(text: "PODCAST"),
+                Tab(text: "WORKSHOPS"),
+              ],
+            ),
       ),
     );
   }

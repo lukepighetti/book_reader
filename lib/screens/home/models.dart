@@ -26,13 +26,10 @@ class ColorTransition {
 
   Color blendedColor;
 
-  int length;
-
   ColorTransition({
     this.colors,
     this.offset,
     this.maxExtent,
-    this.length,
   }) {
     double period = maxExtent / (colors.length - 1);
     int index = max(0, (offset / period).floor());
@@ -43,8 +40,7 @@ class ColorTransition {
       Color secondColor = colors[index + 1];
       double blend = (min(max(0.0, offset), maxExtent) % period) / period;
 
-      // print(blend);
-
+      /// alpha blend isn't going to work, we need some kind of tweening
       this.blendedColor = Color.alphaBlend(
         firstColor.withOpacity(1.0 - blend),
         secondColor.withOpacity(blend),
@@ -52,7 +48,12 @@ class ColorTransition {
     } else {
       this.blendedColor = firstColor;
     }
-
-    // this.blendedColor = Color.fromARGB(100, 100, 100, 100);
   }
+}
+
+class DoubleColor {
+  double number;
+  Color color;
+
+  DoubleColor(this.number, this.color);
 }
