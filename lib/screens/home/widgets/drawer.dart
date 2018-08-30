@@ -53,7 +53,10 @@ class _MyDrawerState extends State<MyDrawer> with TickerProviderStateMixin {
           padding: EdgeInsets.symmetric(horizontal: 12.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[_TabBar(), _Progress()],
+            children: <Widget>[
+              _TabBar(),
+              _Progress(),
+            ],
           ),
         ),
       ),
@@ -88,7 +91,7 @@ class _TabBar extends StatelessWidget {
         unselectedLabelColor: Colors.grey,
         isScrollable: true,
         indicatorWeight: 4.0,
-        indicatorSize: TabBarIndicatorSize.label,
+        indicatorPadding: EdgeInsets.all(12.0),
         tabs: [
           Tab(text: "BOOKS"),
           Tab(text: "PODCAST"),

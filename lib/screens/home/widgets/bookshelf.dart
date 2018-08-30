@@ -53,8 +53,8 @@ class _BookshelfState extends State<Bookshelf> with TickerProviderStateMixin {
       child: Container(
         alignment: Alignment.bottomCenter,
         child: Container(
-          // color: Colors.grey,
-          height: MediaQuery.of(context).size.height * .70,
+          padding: EdgeInsets.only(top: 36.0, bottom: 28.0),
+          height: MediaQuery.of(context).size.height * .72,
           child: StreamBuilder(
             stream: BlocProvider.of(context).books,
             initialData: <Book>[],
@@ -77,7 +77,7 @@ class MyBook extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 52.0, horizontal: 12.0),
+      margin: EdgeInsets.symmetric(vertical: 24.0, horizontal: 10.0),
       decoration: BoxDecoration(
         color: Colors.grey[100],
         borderRadius: BorderRadius.circular(12.0),
