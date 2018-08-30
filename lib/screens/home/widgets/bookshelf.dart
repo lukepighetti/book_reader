@@ -46,23 +46,28 @@ class _BookshelfState extends State<Bookshelf> with TickerProviderStateMixin {
           _pageController.offset / _pageController.position.maxScrollExtent);
     });
 
-    return SizeTransition(
-      sizeFactor: _animation,
-      axis: Axis.horizontal,
-      axisAlignment: -0.9,
-      child: Container(
-        alignment: Alignment.bottomCenter,
+    return Container(
+      alignment: Alignment.bottomRight,
+      child: SizeTransition(
+        sizeFactor: _animation,
+        axis: Axis.horizontal,
+        axisAlignment: -1.0,
         child: Container(
-          padding: EdgeInsets.only(top: 36.0, bottom: 28.0),
-          height: MediaQuery.of(context).size.height * .72,
-          child: StreamBuilder(
-            stream: BlocProvider.of(context).books,
-            initialData: <Book>[],
-            builder: (context, AsyncSnapshot<List<Book>> snapshot) => PageView(
-                  controller: _pageController,
-                  children:
-                      snapshot.data.map((book) => MyBook(book: book)).toList(),
-                ),
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            padding: EdgeInsets.only(top: 36.0, bottom: 28.0),
+            height: MediaQuery.of(context).size.height * .72,
+            child: StreamBuilder(
+              stream: BlocProvider.of(context).books,
+              initialData: <Book>[],
+              builder: (context, AsyncSnapshot<List<Book>> snapshot) =>
+                  PageView(
+                    controller: _pageController,
+                    children: snapshot.data
+                        .map((book) => MyBook(book: book))
+                        .toList(),
+                  ),
+            ),
           ),
         ),
       ),
