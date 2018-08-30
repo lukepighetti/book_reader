@@ -19,7 +19,7 @@ class Background extends StatelessWidget {
           builder: (context, AsyncSnapshot<DoubleColor> snapshot) => Container(
                 margin: EdgeInsets.only(
                   /// TODO refactor this so we can allow iOS to pull down by paging far left
-                  bottom: max(0.0, snapshot.data.number) * 50,
+                  bottom: max(0.0, snapshot.data.number) * 100,
                 ),
                 child: Container(
                   decoration: BoxDecoration(
